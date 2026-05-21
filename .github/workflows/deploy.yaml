@@ -32,9 +32,6 @@ jobs:
   test:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./scripts
     steps:
       - run: |
           gh issue --repo ${{ github.repository }} \
@@ -58,7 +55,7 @@ jobs:
       # Run all the linters
       - run: npm run lint-content -- --fix
       # Run all the scripts in the folder script/**
-      - run: node url-checker.js
+      - run: node ./scripts/url-checker.js
 
 
 
