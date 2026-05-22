@@ -51,12 +51,28 @@ jobs:
       - run: node ./script/url-checker.js
 
 
-
-
-
-
-
-#  build:
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    env:
+      PATH_PREFIX: /cd13461-github-actions-project-starter/
+    steps:
+      # Checkout the repository
+      - uses: actions/checkout@v4
+      # Setup Node (version 18+) --> deprecated, so ignore
+      - uses: actions/setup-node@v4
+      # Setup pages
+      - uses: actions/configure-pages@v4
+      # Use GitHub Actions artifacts to upload a zip file
+      - uses: actions/upload-pages-artifact@v3
+      # Install all the dependencies needed. Use the cache to speed up the process
+      - uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+                    ${{ runner.os }}-npm-
+      - run: npm install
 #
 #
 #
