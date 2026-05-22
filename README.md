@@ -1,3 +1,6 @@
+GitHub repository URL: https://github.com/laurasto/cd13461-github-actions-project-starter
+Knowledge base website URL: https://laurasto.github.io/cd13461-github-actions-project-starter/
+
 # CorpX Documentation
 
 Welcome to CorpX documentation! Our documentation serves as a vital resource for understanding our products, services, and processes. It ensures clarity, consistency, and accessibility for both internal teams and external users. We value your contributions to keeping our documentation robust and up-to-date.
@@ -32,8 +35,8 @@ This knowledge base receives contributions on a daily basis through pull request
     Starting up http-server, serving ./
 
     http-server version: 14.1.1
-    
-    http-server settings: 
+
+    http-server settings:
     CORS: disabled
     Cache: 3600 seconds
     Connection Timeout: 120 seconds
@@ -42,7 +45,7 @@ This knowledge base receives contributions on a daily basis through pull request
     Serve GZIP Files: false
     Serve Brotli Files: false
     Default File Extension: none
-    
+
     Available on:
       http://127.0.0.1:8080
       http://10.124.12.199:8080
@@ -103,7 +106,7 @@ For this job, you are required to:
 1. Make sure that the `test` job ran and succeeded
 2. Checkout the repository
 3. Setup pages using `actions/configure-pages@v4`
-4. Setup Node (version 18+) 
+4. Setup Node (version 18+)
 5. Install all the dependencies needed. Use the cache to speed up the process
 6. Build the static pages
     1. In order for 11ty to build your site successfully, it requires an environment variable `PATH_PREFIX` to be set and to have the value of the name of your repository
