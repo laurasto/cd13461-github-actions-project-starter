@@ -79,10 +79,21 @@ jobs:
       # Use GitHub Actions artifacts to upload a zip file
       - uses: actions/upload-pages-artifact@v3
 
-#
-#
-#
-#  deploy:
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: github-pages
+          path: _site
+
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
+
+
 
 
 
