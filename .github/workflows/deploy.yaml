@@ -46,7 +46,7 @@ jobs:
             ${{ runner.os }}-npm-
       - run: npm install
       # Run all the linters
-      - run: npm run lint -- --fix
+      - run: npm run lint
       # Run all the scripts in the folder script/**
       - run: node ./scripts/url-checker.js
 
