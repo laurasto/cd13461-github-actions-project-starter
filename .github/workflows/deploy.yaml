@@ -48,7 +48,7 @@ jobs:
       # Run all the linters
 #      - run: npm run lint
       # Run all the scripts in the folder script/**
-      - run: node ./scripts/url-checker.js
+      - run: node ./script/url-checker.js
 
 
 
