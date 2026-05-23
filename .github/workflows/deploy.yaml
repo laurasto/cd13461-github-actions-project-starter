@@ -18,7 +18,7 @@ on:
 
 concurrency:
   group: "pages"
-  cancel-in-progress: false
+  cancel-in-progress: true
 #  group: ${{ github.workflow }}-${{ github.ref }}
 #  cancel-in-progress: true
 
@@ -37,6 +37,8 @@ jobs:
       - uses: actions/checkout@v4
       # Setup Node (version 18+)
       - uses: actions/setup-node@v4
+        with:
+            node-version: v24.16.0
       # Install all the dependencies needed. Use the cache to speed up the process
       - uses: actions/cache@v4
         with:
@@ -61,6 +63,8 @@ jobs:
       - uses: actions/checkout@v4
       # Setup Node (version 18+) --> deprecated, so ignore
       - uses: actions/setup-node@v4
+        with:
+            node-version: v24.16.0
 
       # Install all the dependencies needed. Use the cache to speed up the process
       - uses: actions/cache@v4
@@ -73,7 +77,7 @@ jobs:
       - name: Build site
         run: |
           mkdir _site
-          echo "<h1>My site</h1>" > _site/index.html
+          echo "<h1>🐛My site finally set up!🦋</h1>" > _site/index.html
       # Setup pages
       - uses: actions/configure-pages@v4
       # Use GitHub Actions artifacts to upload a zip file
