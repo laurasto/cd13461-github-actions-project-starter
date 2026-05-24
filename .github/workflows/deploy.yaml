@@ -119,6 +119,9 @@ jobs:
     needs: deploy
 
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
       - name: Create GH issue
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
