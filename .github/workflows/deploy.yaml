@@ -26,62 +26,78 @@ permissions:
   contents: read
   pages: write
   id-token: write
+  issues: write
 
 
 jobs:
   test:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
+
     steps:
       # Checkout the repository
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
       # Setup Node (version 18+)
-      - uses: actions/setup-node@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
             node-version: v24.16.0
       # Install all the dependencies needed. Use the cache to speed up the process
-      - uses: actions/cache@v4
+      - name: Cache npm
+        uses: actions/cache@v4
         with:
           path: ~/.npm
           key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-npm-
-      - run: npm install
+      - name: Install dependencies
+        run: npm install
       # Run all the linters
-      - run: npm run js:lint
+      - name: run javascript lint
+        run: npm run js:lint
       # Run all the scripts in the folder script/**
-      - run: node ./script/url-checker.js
+      - name: run URL checker
+        run: node ./script/url-checker.js
 
 
   build:
     needs: test
     runs-on: ubuntu-latest
     env:
-      PATH_PREFIX: /cd13461-github-actions-project-starter/
+      PATH_PREFIX: /${{github.event.repository.name}}/
     steps:
       # Checkout the repository
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
       # Setup Node (version 18+) --> deprecated, so ignore
-      - uses: actions/setup-node@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
             node-version: v24.16.0
 
       # Install all the dependencies needed. Use the cache to speed up the process
-      - uses: actions/cache@v4
+      - name: Cache dependencies
+        uses: actions/cache@v4
         with:
           path: ~/.npm
           key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
                     ${{ runner.os }}-npm-
-      - run: npm install
+      - name: Install dependencies
+        run: npm install
       - name: Build site
         run: |
           mkdir _site
           echo "<h1>🐛My site finally set up!🦋</h1>" > _site/index.html
       # Setup pages
-      - uses: actions/configure-pages@v4
+      - name: Configure pages
+        uses: actions/configure-pages@v4
       # Use GitHub Actions artifacts to upload a zip file
-      - uses: actions/upload-pages-artifact@v3
+      - name: Upload pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
 
   deploy:
     needs: build
@@ -96,6 +112,21 @@ jobs:
 
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4
+
+
+  create_issue:
+    runs-on: ubuntu-latest
+    needs: deploy
+
+    steps:
+      - name: Create GH issue
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue create \
+            --title "Deployment successful" \
+            --body "Your site has been deployed 🎉"
+
 
 
 
