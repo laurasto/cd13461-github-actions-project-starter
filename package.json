@@ -4,6 +4,7 @@
   "author": "Cone (https://conedevelopment.com)",
   "main": ".eleventy.js",
   "scripts": {
+    "build": "eleventy",
     "delete:dist": "del-cli --force _site",
     "eleventy:dev": "npx eleventy --serve",
     "eleventy:prod": "npx eleventy --output=_site",
