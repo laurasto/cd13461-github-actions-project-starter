@@ -87,9 +87,7 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Build site
-        run: |
-          mkdir _site
-          echo "<h1>🐛My site finally set up!🦋</h1>" > _site/index.html
+        run: npm run build
       # Setup pages
       - name: Configure pages
         uses: actions/configure-pages@v4
