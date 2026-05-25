@@ -1,5 +1,5 @@
-GitHub repository URL: https://github.com/laurasto/cd13461-github-actions-project-starter
-Knowledge base website URL: https://laurasto.github.io/cd13461-github-actions-project-starter/
+- GitHub repository URL: https://github.com/laurasto/cd13461-github-actions-project-starter
+- Knowledge base website URL: https://laurasto.github.io/cd13461-github-actions-project-starter/
 
 # CorpX Documentation
 
